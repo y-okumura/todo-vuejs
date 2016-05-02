@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>todo-vuejs</title>
+  </head>
+  <body>
+    <form id="todo" v-on:submit.prevent="addTask">
+      There is {{count == 0 ? "no" : count}} {{count <= 1 ? "task" : "tasks"}}.
+      <ul>
+        <li v-for="task in tasks">{{task}}</li>
+        <li><input name="new-todo" id="new-todo" v-model="newTodo"/></li>
+      </ul>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
+    <script>
+      new Vue({
+        el: "#todo",
+        data: {
+          newTodo: "test",
+          tasks: []
+        },
+        computed: {
+          count() {
+            return this.tasks.length
+          }
+        },
+        methods: {
+          addTask() {
+            this.tasks.push(this.newTodo)
+            this.newTodo = ""
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
